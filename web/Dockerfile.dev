@@ -1,0 +1,17 @@
+# Use official Node.js image
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy package files and install dependencies
+COPY package.json package-lock.json ./
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Expose dev server port
+EXPOSE 5173
+
+# Start SvelteKit dev server with host binding
+CMD ["npm", "run", "dev", "--", "--host"]

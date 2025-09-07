@@ -1,0 +1,55 @@
+services:
+  xyrelith-web:
+    container_name: xyrelith-web
+    build:
+      context: ../web
+      dockerfile: Dockerfile.dev
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../web:/app
+      - /app/node_modules
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - xyrelith-api
+    networks:
+      xyrelith:
+
+  xyrelith-api:
+    container_name: xyrelith-api
+    build:
+      context: ../api
+      dockerfile: Dockerfile
+    ports:
+      - "2712:2712"
+    volumes:
+      - ../api:/app
+      - /app/bin
+    environment:
+      GO_ENV: development
+      POSTGRES_USER: xyrelith
+      POSTGRES_PASSWORD: xyrelith
+      POSTGRES_DB: xyrelith 
+    networks:
+      xyrelith:
+
+  xyrelith-db:
+    image: postgres
+    container_name: xyrelith-db
+    environment:
+      POSTGRES_USER: xyrelith
+      POSTGRES_PASSWORD: xyrelith
+      POSTGRES_DB: xyrelith    
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data 
+    networks:
+      xyrelith:
+
+volumes:
+  db_data:
+
+networks:
+  xyrelith:
