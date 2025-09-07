@@ -1,0 +1,19 @@
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - docs/**
+
+🖥️web:
+  - changed-files:
+      - any-glob-to-any-file:
+          - web/**
+
+🗄️api:
+  - changed-files:
+      - any-glob-to-any-file:
+          - api/**
+
+🧠 ci/cd:
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/workflows/**
