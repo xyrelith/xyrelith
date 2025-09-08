@@ -11,6 +11,9 @@ permissions:
 jobs:
   golangci-lint:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
     steps:
       - name: Checkout code
         uses: actions/checkout@v5
@@ -24,4 +27,5 @@ jobs:
         uses: golangci/golangci-lint-action@v8
         with:
           version: v2.4
+          working-directory: api
           args: --timeout=5m
