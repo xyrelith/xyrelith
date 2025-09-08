@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"time"
 
 	"github.com/gin-contrib/cors"
@@ -16,7 +17,9 @@ func main() {
 	x_postgres.Init()
 	x_openai.Init()
 
-	x_postgres.DB.AutoMigrate(models.Event{})
+	if err := x_postgres.DB.AutoMigrate(models.Event{}); err != nil {
+		log.Fatalf("Failed to migrate databse: %v", err)
+	}
 
 	router := gin.Default()
 
@@ -32,5 +35,7 @@ func main() {
 	router.POST("/api/createEvent", endpoints.CreateEvent)
 	router.GET("/api/scheduleEvents", endpoints.ScheduleEvents)
 	router.GET("/api/listEvents", endpoints.ListEvents)
-	router.Run(":2712")
+	if err := router.Run(":2712"); err != nil {
+		log.Fatalf("Failed to run api server: %v", err)
+	}
 }
