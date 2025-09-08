@@ -13,7 +13,7 @@ documentation:
       - any-glob-to-any-file:
           - api/**
 
-🧠 ci/cd:
+🧠ci/cd:
   - changed-files:
       - any-glob-to-any-file:
           - .github/workflows/**
