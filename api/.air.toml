@@ -1,6 +1,6 @@
 [build]
-  cmd = "go build -o main ."
-  bin = "main"
+	cmd = "go build -o bin/main ."
+	bin = "bin/main"
   include_ext = ["go","tpl","tmpl","html"]
   exclude_dir = ["assets","tmp","vendor"]
 

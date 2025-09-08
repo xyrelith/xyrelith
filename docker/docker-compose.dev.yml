@@ -9,8 +9,8 @@ services:
     volumes:
       - ../web:/app
       - /app/node_modules
-    environment:
-      NODE_ENV: development
+    env_file:
+      - .env
     depends_on:
       - xyrelith-api
     networks:
@@ -26,21 +26,16 @@ services:
     volumes:
       - ../api:/app
       - /app/bin
-    environment:
-      GO_ENV: development
-      POSTGRES_USER: xyrelith
-      POSTGRES_PASSWORD: xyrelith
-      POSTGRES_DB: xyrelith 
+    env_file:
+      - .env
     networks:
       xyrelith:
 
   xyrelith-db:
     image: postgres
     container_name: xyrelith-db
-    environment:
-      POSTGRES_USER: xyrelith
-      POSTGRES_PASSWORD: xyrelith
-      POSTGRES_DB: xyrelith    
+    env_file:
+      - .env
     ports:
       - "5432:5432"
     volumes:
